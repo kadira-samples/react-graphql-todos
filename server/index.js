@@ -5,8 +5,11 @@ import Schema from './schema';
 import { graphql } from 'graphql';
 import bodyParser from 'body-parser';
 
-const {NODE_ENV} = process.env;
-const IS_PRODUCTION = NODE_ENV === "production";
+const {
+  NODE_ENV,
+  PORT = "3000"
+} = process.env;
+const IS_PRODUCTION = NODE_ENV === "production"; 
 
 // Configure webpck dev server
 const devServer = new WebpackDevServer(webpack(config), {
@@ -34,11 +37,11 @@ const devServer = new WebpackDevServer(webpack(config), {
   }
 });
 
-devServer.listen(3000, (err, result) => {
+devServer.listen(PORT, (err, result) => {
   if(err) {
     throw err;
   }
 
-  console.log('Listening at localhost:3000');
+  console.log(`Listening at localhost:${PORT}`);
 });
 
