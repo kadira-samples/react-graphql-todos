@@ -1,5 +1,8 @@
 import fetch from 'isomorphic-fetch';
 
+/*
+  Simple GraphQL transport which send queries to a GraphQL endpoint
+*/
 export default class GraphQLTransport {
   constructor(path = "/graphql") {
     this.path = path;
@@ -7,6 +10,7 @@ export default class GraphQLTransport {
 
   sendQuery(query, vars = {}) {
     return new Promise((resolve, error) => {
+      // use fetch to get the result
       fetch(this.path, {
         method: 'post',
         headers: {
@@ -18,7 +22,9 @@ export default class GraphQLTransport {
           vars
         })
       })
+      // get the result as JSON
       .then(res => res.json())
+      // trigger result or error
       .then(response => {
         if(response.errors) {
           return error(response.errors);
