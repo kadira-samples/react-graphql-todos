@@ -15,7 +15,7 @@ export default class TodosModel {
     setTimeout(() => {
       this.data.push(item);
       callback(this.getAll());
-    }, 1000);
+    }, 400);
     return this.data.concat([`adding "${item}" ...`]);
   }
 }

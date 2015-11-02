@@ -1,15 +1,14 @@
-import { Component } from 'react';
 import React from 'react';
 
-class TodoBanner extends Component {
+class TodoBanner extends React.Component {
   render() {
     return (
-      <h3>TODO with React and GraphQL </h3>
+      <h3>TODO app with React and GraphQL </h3>
     );
   }
 }
 
-class TodoList extends Component {
+class TodoList extends React.Component {
   render() {
     return (
       <ul>
@@ -25,7 +24,7 @@ class TodoList extends Component {
   }
 }
 
-class TodoForm extends Component {
+class TodoForm extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
@@ -49,14 +48,18 @@ class TodoForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type='text' ref='item' onChange={this.onChange.bind(this)}/>
+        <input 
+          type='text' 
+          ref='item' 
+          onChange={this.onChange.bind(this)} 
+          value={this.state.item}/>
         <input type='submit' value='Add'/>
       </form>
     );
   }
 }  
 
-export default class TodoApp extends Component {
+export default class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.model = this.props.model;
@@ -66,8 +69,10 @@ export default class TodoApp extends Component {
   }
 
   updateItems(newItem) {
-    const allItems = this.model.addItem(newItem, this.setItems.bind(this));
-    this.setItems(allItems);
+    // recived the items with latency compensation and register
+    // it to recieve updates items
+    const pendingItems = this.model.addItem(newItem, this.setItems.bind(this));
+    this.setItems(pendingItems);
   }
 
   setItems(items) {
