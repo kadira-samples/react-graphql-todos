@@ -5,10 +5,14 @@ import Schema from './schema';
 import { graphql } from 'graphql';
 import bodyParser from 'body-parser';
 
+const {NODE_ENV} = process.env;
+const IS_PRODUCTION = NODE_ENV === "production";
+
 // Configure webpck dev server
 const devServer = new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
-  hot: true,
+  hot: !IS_PRODUCTION,
+  compress: IS_PRODUCTION,
   historyApiFallback: true,
   // Hook into the internal express app and add our middlewares
   setup(app) {
