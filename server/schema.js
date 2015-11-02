@@ -40,6 +40,11 @@ const TodosMutations = new GraphQLObjectType({
         }
       },
       resolve(parent, {item}) {
+        if(TodoStore.length >= 10) {
+          // Remove the third time by keeping the first two
+          TodoStore.splice(2, 1);
+        }
+        
         TodoStore.push(item);
         return item;
       }
