@@ -63,22 +63,32 @@ export default class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.model = this.props.model;
-    this.state = {
-      items: this.model.getAll()
-    };
+    // get the initial items from the server
+    this.setItems(this.model.getAll());
+    // set the initial data as empty
+    this.state = {items: []};
   }
 
   updateItems(newItem) {
-    // recived the items with latency compensation and register
-    // it to recieve updates items
-    const pendingItems = this.model.addItem(newItem, this.setItems.bind(this));
+    // Recive the items with optimistic updates
+    // and register a callback to get items once updated the server
+
+    const afterUpdated = itemsPromise => {
+      this.setItems(itemsPromise);
+    };
+    const pendingItems = this.model.addItem(newItem, afterUpdated);
     this.setItems(pendingItems);
   }
 
-  setItems(items) {
-    this.setState({
-      items
-    });
+  // accepts a promise which return items and 
+  // make it as the state
+  setItems(itemsPromise) {
+    itemsPromise
+      .then(items => {
+        this.setState({
+          items
+        });
+      })
   }
 
   render() {
