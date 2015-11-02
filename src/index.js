@@ -1,3 +1,6 @@
 import React from 'react';
+import App from './app';
+import Model from './model';
 
-React.render(<p>Hello World</p>, document.getElementById('root'));
+const model = new Model();
+React.render(<App model={model}/>, document.getElementById('root'));
