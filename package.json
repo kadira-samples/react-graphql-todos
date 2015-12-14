@@ -43,8 +43,9 @@
     "babel-core": "5.x.x",
     "react": "^0.13.0",
     "graphql": "0.4.x",
-    "isomorphic-fetch": "*",
     "underscore": "1.8.x",
-    "body-parser": "1.x.x"
+    "body-parser": "1.x.x",
+    "lokka": "1.x.x",
+    "lokka-transport-http": "1.x.x"
   }
 }

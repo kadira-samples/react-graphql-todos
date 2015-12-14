@@ -1,18 +1,20 @@
-import GraphQLTransport from './graphql_transport';
+import Lokka from 'lokka';
+import Transport from 'lokka-transport-http';
 
 /*
-  Model responsible for querying and mutation todos
+  Model responsible for querying and mutate todos
 */
 export default class TodosModel {
   constructor() {
-    // create a new GraphQL transport
-    // you'll use this to interact with the graphql endpoint
-    this.transport = new GraphQLTransport('/graphql');
+    // create a new Lokka client
+    this.client = new Lokka({
+      transport: new Transport('/graphql')
+    });
 
     // Get the initial data from the transport (it's a promise)
-    this.dataPromise = this.transport
+    this.dataPromise = this.client
       // invoke the GraphQL query to get all the items
-      .sendQuery(`
+      .query(`
         {items}
       `)
       .then(res => res.items);
@@ -27,10 +29,10 @@ export default class TodosModel {
   // Add a newItem and register a callback to fire after 
   // getting response from the server
   addItem(newItem, afterAdded) {
-    this.transport
+    this.client
       // Invoke the GraphQL query, which invoke our `addItem` mutation
-      .sendQuery(`
-        mutation _ {
+      .mutate(`
+        {
           item: addItem(item: "${newItem}")
         }
       `)

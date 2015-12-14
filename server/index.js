@@ -26,8 +26,8 @@ const devServer = new WebpackDevServer(webpack(config), {
     app.use((req, res, next) => {
       if(req.url === '/graphql' && req.method === "POST") {
         // Executing the GraphQL query
-        const {query, vars} = req.body;
-        graphql(Schema, query, null, vars).then(result => {
+        const {query, variables} = req.body;
+        graphql(Schema, query, null, variables).then(result => {
           res.send(result);
         });
       } else {
