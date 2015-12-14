@@ -5,7 +5,7 @@ A simple Todo app with React using GraphQL as the data source. This app has opti
 
 ![A React Todo App with GraphQL](https://cldup.com/TO16ICNaVZ.png)
 
-> This project is extended from [this](http://pankajparashar.com/posts/todo-app-react-js/) React tutorial. Kudos for the original author.
+> This project is extended from [this](http://pankajparashar.com/posts/todo-app-react-js/) React tutorial. Kudos to the original author.
 
 ## Setting Up
 
@@ -15,7 +15,7 @@ A simple Todo app with React using GraphQL as the data source. This app has opti
 
 ## Source Code
 
-Most of the source code well commented and written in a ES2015 and uses Promise in many places.
+Source code is well commented and written in a ES2015.
 
 Use following entry points:
 
