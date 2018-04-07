@@ -17,6 +17,7 @@ const devServer = new WebpackDevServer(webpack(config), {
   hot: !IS_PRODUCTION,
   compress: IS_PRODUCTION,
   historyApiFallback: true,
+  disableHostCheck: true,
   // Hook into the internal express app and add our middlewares
   setup(app) {
     // We pass GraphQL information as JSON. So, we need a JSON parser
